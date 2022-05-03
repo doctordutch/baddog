@@ -1,33 +1,33 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_THOUGHT } from '../utils/queries';
+import { QUERY_PRODUCT } from '../utils/queries';
 import ReactionList from '../components/ReactionList';
 
 const SingleThought = props => {
-  const { id: thoughtId } = useParams();
-  const { loading, data } = useQuery(QUERY_THOUGHT, {
-    variables: { id: thoughtId }
+  const { id: productId } = useParams();
+  const { loading, data } = useQuery(QUERY_PRODUCT, {
+    variables: { id: productId }
   });
-  const thought = data?.thought || {};
+  const product = data?.product || {};
   if (loading) {
     return <div>Loading, just a sec!</div>;
   }
-  console.log(thoughtId);
+  console.log(productId);
   return (
     <div>
       <div className="card mb-3">
         <p className="card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
-            {thought.username}
+            {product}
           </span>{' '}
-          thought on {thought.createdAt}
+          thought on {product.createdAt}
         </p>
         <div className="card-body">
-          <p>{thought.thoughtText}</p>
+          <p>{product.description}</p>
         </div>
       </div>
-      {thought.reactionCount > 0 && <ReactionList reactions={thought.reactions}/>}
+      {product.commentCount > 0 && <ReactionList comments={product.comments}/>}
     </div>
   );
 };
