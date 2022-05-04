@@ -1,11 +1,12 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Thought, User } = require('../models');
+const { User, Product } = require('../models');
 
 db.once('open', async () => {
-  await Thought.deleteMany({});
+  //await Comment.deleteMany({});
   await User.deleteMany({});
+  await Product.deleteMany();
 
   // create user data
   const userData = [];
@@ -20,55 +21,102 @@ db.once('open', async () => {
 
   const createdUsers = await User.collection.insertMany(userData);
 
-  // create friends
-  for (let i = 0; i < 100; i += 1) {
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { _id: userId } = createdUsers.ops[randomUserIndex];
 
-    let friendId = userId;
+  // create products
+  const products = await Product.insertMany([
+    {
+      productName: 'Charcuterie Board',
+      description:
+        'Beautiful chartuterie board in hickory wood with horseshoe inlay.  Custom wood species and inlay items available!',
+      image: 'char board horseshow.jpg',
+      price: 75.00,
+      quantity: 5
+    },
+    {
+      productName: 'Bath vanity in cherrywood',
+      description:
+        'Custom fit to specifications, vanity with drawers, mirrors.',
+      image: 'cherrywood vanity.jpg',
+      price: 1500.00,
+      quantity: 2
+    },
+    {
+      productName: 'Coffee table',
+      description:
+        'Live edge table from maple, "Honolulu blue" epoxy fill, variation and customization upon request.',
+      image: 'coffee table in blue.jpg',
+      price: 450.00,
+      quantity: 1
+    },
+    {
+      productName: 'Home office design per hour',
+      description:
+        'Full home office layout includes custom design printed with onsite measurement.',
+      image: 'design-home office.jpg',
+      price: 40.00,
+      quantity: 1
+    },
+    {
+      productName: 'Kitchen table design per hour',
+      description:
+        'Kitchen table design layout includes custom design printed with onsite measurement.',
+      image: 'design-kitchen table.jpg',
+      price: 40.00,
+      quantity: 1
+    },
+    {
+      productName: 'Vanity design per hour',
+      description:
+        'Bath vanity layout includes custom design printed with onsite measurement.',
+      image: 'design-vanity.jpg',
+      price: 40.00,
+      quantity: 1
+    },
+       {
+      productName: 'Dining table',
+      description:
+        'Dining table, 8 feet in length with custom design and welded steel base.  Custom species, length and width available.',
+      image: 'dining table.jpg',
+      price: 12000.00,
+      quantity: 1
+    },
+    {
+      productName: 'Residential doors',
+      description: 'Standard size solid wood doors.  Custom design, species and sizes available.',
+      image: 'spinning-top.jpg',
+      price: 250.00,
+      quantity: 6
+    },
+    {
+      productName: 'Bath vanity in hickory',
+      description:
+        'Vanity for residential bath in custom side and species.',
+      image: 'hickory vanity.jpg',
+      price: 1200.00,
+      quantity: 2
+    },
+    ]);
 
-    while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-      friendId = createdUsers.ops[randomUserIndex];
-    }
+  console.log('products seeded');
 
-    await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
-  }
+  
 
-  // create thoughts
-  let createdThoughts = [];
-  for (let i = 0; i < 100; i += 1) {
-    const thoughtText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  // create comments
+  // for (let i = 0; i < 100; i += 1) {
+  //   const commentBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username, _id: userId } = createdUsers.ops[randomUserIndex];
+  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+  //   const { username } = createdUsers.ops[randomUserIndex];
 
-    const createdThought = await Thought.create({ thoughtText, username });
+  //   // const randomProductIndex = Math.floor(Math.random() * createdProducts.length);
+  //   // const { _id: CommentId } = createdComments[randomCommentIndex];
 
-    const updatedUser = await User.updateOne(
-      { _id: userId },
-      { $push: { thoughts: createdThought._id } }
-    );
-
-    createdThoughts.push(createdThought);
-  }
-
-  // create reactions
-  for (let i = 0; i < 100; i += 1) {
-    const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username } = createdUsers.ops[randomUserIndex];
-
-    const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
-    const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
-
-    await Thought.updateOne(
-      { _id: thoughtId },
-      { $push: { reactions: { reactionBody, username } } },
-      { runValidators: true }
-    );
-  }
+  //   await Product.updateOne(
+  //     { _id: productId },
+  //     { $push: { comments: { commentBody, username } } },
+  //     { runValidators: true }
+  //   );
+  // }
 
   console.log('all done!');
   process.exit(0);
