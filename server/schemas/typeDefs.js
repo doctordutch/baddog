@@ -44,6 +44,7 @@ const typeDefs = gql`
       addUser(username: String!, email: String!, password: String!): Auth
       addProduct(productName: String!): Product
       addComment(commentId: ID!): Comment
+      updateProduct(productName: String!): Product
   }
 
   type Auth {
