@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../utils/queries';
-import Thoughtlist from '../components/Thoughtlist';
+import Productlist from '../components/Productlist';
 
 const Home = () => {
   //use useQuery hook to make a query request
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <main>
       <div className='flex-row justify-space-between'>
-        
+        test
       </div>
     </main>
   );
