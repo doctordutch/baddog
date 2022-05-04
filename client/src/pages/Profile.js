@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Thoughtlist from '../components/Thoughtlist';
+import Productlist from '../components/Productlist';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
-import FriendList from '../components/FriendList';
+// import FriendList from '../components/FriendList';
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
@@ -27,13 +27,10 @@ const Profile = (props) => {
 
       <div className="flex-row justify-space-between mb-3">
         <div className="col-12 mb-3 col-lg-8">
-          <Thoughtlist thoughts={user.thoughts} title={`${user.username}'s thoughts...`} />
+          <Productlist thoughts={user.thoughts} title={`${user.username}'s thoughts...`} />
           </div>
         <div className="col-12 col-lg-3 mb-3">
-          <FriendList 
-          username={user.username}
-          friendCount={user.friendCount}
-          friends={user.friends}/>
+    
       </div>
       </div>
     </div>
