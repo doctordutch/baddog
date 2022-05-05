@@ -1,30 +1,15 @@
-const faker = require('faker');
-
 const db = require('../config/connection');
 const { User, Product } = require('../models');
 
 db.once('open', async () => {
   //await Comment.deleteMany({});
-  await User.deleteMany({});
   await Product.deleteMany();
-
-  // create user data
-  const userData = [];
-
-  for (let i = 0; i < 50; i += 1) {
-    const username = faker.internet.userName();
-    const email = faker.internet.email(username);
-    const password = faker.internet.password();
-
-    userData.push({ username, email, password });
-  }
-
-  const createdUsers = await User.collection.insertMany(userData);
 
 
   // create products
   const products = await Product.insertMany([
     {
+      
       productName: 'Charcuterie Board',
       description:
         'Beautiful chartuterie board in hickory wood with horseshoe inlay.  Custom wood species and inlay items available!',
@@ -99,6 +84,30 @@ db.once('open', async () => {
 
   console.log('products seeded');
 
+  await User.deleteMany();
+  
+    await User.create({
+        username: 'kat',
+        email: 'kat@test.com',
+        password: '123456',
+        orders: [
+            {
+                products: [products[0]._id, products[1]]
+            }
+        ]
+    });
+
+    await User.create({
+        username: 'lala',
+        email: 'lala@test.com',
+        password: '123456'
+    });
+
+    console.log('users seeded');
+
+    process.exit();
+});
+
   
 
   // create comments
@@ -118,6 +127,3 @@ db.once('open', async () => {
   //   );
   // }
 
-  console.log('all done!');
-  process.exit(0);
-});
