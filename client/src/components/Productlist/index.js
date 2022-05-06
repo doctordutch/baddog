@@ -11,9 +11,9 @@ import {idbPromise} from '../../utils/helpers';
 function ProductList() {
     const [state, dispatch] = useStoreContext();
 
-    const {currentProduct} = state;
+    const {currentProducts} = state;
 
-    const { data } = useQuery(QUERY_PRODUCTS);
+    const {  loading, data } = useQuery(QUERY_PRODUCTS);
 
     useEffect(() => {
         if(data) {
@@ -24,7 +24,7 @@ function ProductList() {
             data.products.forEach((product) => {
                 idbPromise('products', 'put', product);
               });
-        } else if (!data) {
+        } else if (!loading)  {
             idbPromise('products', 'get').then((products) => {
                 dispatch({
                 type: UPDATE_PRODUCTS,
@@ -32,15 +32,15 @@ function ProductList() {
             });
         });
     }
-    }, [data, dispatch]);
+    }, [data, loading, dispatch]);
 
     function Products() {
-        if(!currentProduct) {
+        if(!currentProducts) {
             return state.products;
         }
         
         return state.products.filter(
-            (product) => product._id === currentProduct
+            (product) => product.products_id === currentProducts
         );
     }
 

@@ -15,23 +15,36 @@ import {
 
 function Specifications() {
     const [state, dispatch] = useStoreContext();
-    const {id} = useParams();
+    const { id } = useParams();
 
     const [currentProduct, setCurrentProduct] = useState({});
 
-    const { data } = useQuery(QUERY_PRODUCTS);
-    const {products, cart} = state;
+    const { loading, data } = useQuery(QUERY_PRODUCTS);
+    const { products, cart } = state;
 
     useEffect(() => {
         if(products.length) {
             setCurrentProduct(products.find((product) => product._id === id));
+        
         } else if (data) {
             dispatch({
                 type: UPDATE_PRODUCTS,
                 products: data.products,
             });
+
+        data.products.forEach((product) => {
+            idbPromise('products', 'put', product);
+        });
         }
-    }, [products, data, dispatch, id]);
+        else if (!loading) {
+            idbPromise('products', 'get').then((indexedProducts) => {
+                dispatch({
+                    type: UPDATE_PRODUCTS,
+                    products: indexedProducts,
+                });
+            });
+        }
+    }, [products, data, loading, dispatch, id]);
 
     const addedProduct = () => {
         const itemAdded = cart.find((cartItem) => cartItem._id === id);
@@ -43,11 +56,18 @@ function Specifications() {
                purchaseQuantity: parseInt(itemAdded.purchaseQuantity) + 1
 
         });
+
+    idbPromise('cart', 'put', {
+        ...itemAdded,
+        purchaseQuantity: parseInt(itemAdded.purchaseQuantity) + 1
+    });
     } else {
         dispatch({
             type: ADD_TO_CART,
             product: { ...currentProduct, purchaseQuantity: 1 }
         });
+
+    idbPromise('cart', 'put', {...currentProduct, purchaseQuantity: 1});
     };
 };
 
@@ -56,25 +76,26 @@ function Specifications() {
             type: REMOVE_FROM_CART,
             _id: currentProduct._id
         });
-
+        idbPromise('cart', 'delete', {...currentProduct});
 };
 
     return (
         <>
-            {currentProduct ? (
+            {currentProduct  && cart ?  (
                 <div>
                     <Link to='/'>Go back to Products</Link>
                     <h2>{currentProduct.productName}</h2>
                     <p>{currentProduct.description}</p>
                     <p>
-                        <p>Price:</p>${currentProduct.price}{' '}
+                        <strong>Price:</strong>${currentProduct.price}{' '}
 
                         <button onClick={addedProduct}>Add to Cart</button>
-                            <button 
-                            disabled={!cart.find(p => p._id === currentProduct._id)}
+                    <button 
+                            disabled={!cart.find((p) => p._id === currentProduct._id)}
                             onClick={itemDeleted}
                             >
-                            Remove from Cart</button>
+                            Remove from Cart
+                    </button>
                     </p>
                     <img 
                         src={`/images/${currentProduct.image}`}

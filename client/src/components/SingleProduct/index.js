@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { pluralize  } from '../../utils/helpers';
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY} from '../../utils/actions'
+import { idbPromise } from '../../utils/helpers';
 
 function SingleProduct(item) {
     const [state, dispatch] = useStoreContext();
@@ -13,7 +15,6 @@ function SingleProduct(item) {
         createdAt,
         description,
         price
-        
     } = item;
 
     const { cart } = state;
@@ -27,12 +28,17 @@ function SingleProduct(item) {
                 _id: _id,
                 purchaseQuantity: parseInt(itemAdded.purchaseQuantity) + 1
             });
+            idbPromise('cart', 'put', {
+                ...itemAdded,
+                purchaseQuantity: parseInt(itemAdded.purchaseQuantity) + 1
+            });
 
         } else {
             dispatch({
                 type: ADD_TO_CART,
                 product: { ...item, purchaseQuantity: 1}
             });
+            idbPromise('cart', 'put', {...item, purchaseQuantity: 1});
         }
     };
     return (
