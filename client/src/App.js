@@ -52,7 +52,6 @@ function App() {
             <Route exact path="/profile/:username?" component={Profile} />
             <Route exact path="/thought/:id" component={SingleThought} />
             <Route exact path="/purchasedHistory" component={PurchasedHistory} />
-            <Route exact path="/products" component={Home} />
             <Route exact path="/products/:id" component={Specifications} />
             <Route exact path="/profile/:username?" component={Profile} />
             <Route component={NoMatch} />

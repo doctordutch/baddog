@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_TO_CART, UPDATE_CART_QUANTITY} from '../../utils/actions'
 
 function SingleProduct(item) {
     const [state, dispatch] = useStoreContext();
@@ -15,6 +16,25 @@ function SingleProduct(item) {
         
     } = item;
 
+    const { cart } = state;
+
+    const addedProduct = () => {
+        const itemAdded = cart.find((cartItem) => cartItem._id === _id);
+
+        if(itemAdded) {
+            dispatch({
+                type: UPDATE_CART_QUANTITY,
+                _id: _id,
+                purchaseQuantity: parseInt(itemAdded.purchaseQuantity) + 1
+            });
+
+        } else {
+            dispatch({
+                type: ADD_TO_CART,
+                product: { ...item, purchaseQuantity: 1}
+            });
+        }
+    };
     return (
         <div>
             <Link to={`/products/${_id}`}>
@@ -29,7 +49,7 @@ function SingleProduct(item) {
             <span>${price}</span>
             <p>{description} {createdAt}</p>
         </div>
-        <button>Add to cart</button>
+        <button onClick={addedProduct}>Add to cart</button>
         </div>
     );
 }

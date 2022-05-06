@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Cart from '../components/Cart';
 import ProductList from '../components/ProductList';
 
 const Home = () => {
@@ -7,6 +7,7 @@ const Home = () => {
     <main>
       <div className='flex-row justify-space-between'>
         <ProductList />
+        <Cart />
       </div>
     </main>
   );
