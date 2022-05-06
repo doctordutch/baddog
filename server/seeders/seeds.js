@@ -13,7 +13,7 @@ db.once('open', async () => {
       productName: 'Charcuterie Board',
       description:
         'Beautiful chartuterie board in hickory wood with horseshoe inlay.  Custom wood species and inlay items available!',
-      image: 'char-board-horseshow.jpg',
+      image: 'char-board-horseshoe.jpg',
       price: 75.00,
       quantity: 5
     },
