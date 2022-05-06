@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
 
-const Signup = () => {
+import { ADD_USER } from '../utils/mutations';
+import {Link } from 'react-router-dom';
+import Auth from '../utils/auth';
+
+function Signup(props) {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' });
-
+  const [addUser] = useMutation(ADD_USER);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -16,12 +21,23 @@ const Signup = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    const mutationResponse = await addUser({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        username: formState.username,
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
   };
 
   return (
     <main className='flex-row justify-center mb-4'>
       <div className='col-12 col-md-6'>
         <div className='card'>
+          <Link to='/login'>Go back to login</Link>
           <h4 className='card-header'>Sign Up</h4>
           <div className='card-body'>
             <form onSubmit={handleFormSubmit}>

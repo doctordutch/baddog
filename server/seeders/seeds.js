@@ -13,7 +13,7 @@ db.once('open', async () => {
       productName: 'Charcuterie Board',
       description:
         'Beautiful chartuterie board in hickory wood with horseshoe inlay.  Custom wood species and inlay items available!',
-      image: 'char board horseshow.jpg',
+      image: 'char-board-horseshow.jpg',
       price: 75.00,
       quantity: 5
     },
@@ -21,7 +21,7 @@ db.once('open', async () => {
       productName: 'Bath vanity in cherrywood',
       description:
         'Custom fit to specifications, vanity with drawers, mirrors.',
-      image: 'cherrywood vanity.jpg',
+      image: 'cherrywood-vanity.jpg',
       price: 1500.00,
       quantity: 2
     },
@@ -29,7 +29,7 @@ db.once('open', async () => {
       productName: 'Coffee table',
       description:
         'Live edge table from maple, "Honolulu blue" epoxy fill, variation and customization upon request.',
-      image: 'coffee table in blue.jpg',
+      image: 'coffee-table-in-blue.jpg',
       price: 450.00,
       quantity: 1
     },
@@ -37,7 +37,7 @@ db.once('open', async () => {
       productName: 'Home office design per hour',
       description:
         'Full home office layout includes custom design printed with onsite measurement.',
-      image: 'design-home office.jpg',
+      image: 'design-home-office.jpg',
       price: 40.00,
       quantity: 1
     },
@@ -45,7 +45,7 @@ db.once('open', async () => {
       productName: 'Kitchen table design per hour',
       description:
         'Kitchen table design layout includes custom design printed with onsite measurement.',
-      image: 'design-kitchen table.jpg',
+      image: 'design-kitchen-table.jpg',
       price: 40.00,
       quantity: 1
     },
@@ -61,7 +61,7 @@ db.once('open', async () => {
       productName: 'Dining table',
       description:
         'Dining table, 8 feet in length with custom design and welded steel base.  Custom species, length and width available.',
-      image: 'dining table.jpg',
+      image: 'dining-table.jpg',
       price: 12000.00,
       quantity: 1
     },
@@ -76,7 +76,7 @@ db.once('open', async () => {
       productName: 'Bath vanity in hickory',
       description:
         'Vanity for residential bath in custom side and species.',
-      image: 'hickory vanity.jpg',
+      image: 'hickory-vanity.jpg',
       price: 1200.00,
       quantity: 2
     },

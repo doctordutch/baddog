@@ -1,19 +1,55 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_PRODUCTS = gql`
-  query products {
+{
+  products {
+    _id
+    productName
+    quantity
+    price
+    image
+    description
+  
+  }
+}
+`;
+
+
+
+export const QUERY_USER = gql`
+ {
+  user {
+    _id
+    username
+    email
+    comments {
+      _id
+      commentBody
+      createdAt
+    orders {
+      _id
+      purchaseDate
     products {
       _id
       productName
-      createdAt
       quantity
-      price
+      createdAt
       image
       description
-    
+      price
+    }
+    }
     }
   }
+}
 `;
+
+
+
+
+
+
+
 
 export const QUERY_PRODUCT = gql`
   query product($id: ID!) {
@@ -25,22 +61,6 @@ export const QUERY_PRODUCT = gql`
       price
       image description
       
-    }
-  }
-`;
-
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
-      _id
-      username
-      email
-     
-      comments {
-        _id
-        commentBody
-        createdAt
-      }
     }
   }
 `;
