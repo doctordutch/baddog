@@ -2,5 +2,19 @@
   .closed {
     position: absolute;
     cursor: pointer;
-    margin-right: 50px;
+    margin-right: 100px;
+    margin-left: 700px;
+    margin-top: -100px;
   }
+
+  .closed img {
+    width: 25%;
+  }
+
+.cart {
+  width: 5%;
+}
+
+.img {
+  width: 5%;
+}

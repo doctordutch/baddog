@@ -15,6 +15,19 @@ const typeDefs = gql`
     comments: [Comment]
   }
 
+  type Products {
+    _id: ID
+    productName: String
+    createdAt: String
+    description: String
+    price: Float
+    image: String
+    quantity: Int
+    comments: [Comment]
+  }
+
+  
+
   type Comment {
     _id: ID
     commentBody: String
@@ -36,6 +49,14 @@ const typeDefs = gql`
     products: [Product]
   }
 
+  type Checkout {
+    session: ID
+  }
+
+ type Auth {
+      token: ID!
+      user: User
+  }
 
   type Query {
     me: User
@@ -46,6 +67,7 @@ const typeDefs = gql`
     comments(username: String): [Comment]
     comment(_id: ID!): Comment
     order(_id: ID!): Order
+    checkout(products: [ID]!): Checkout
 
   }
 
@@ -56,11 +78,6 @@ const typeDefs = gql`
       updateProduct(_id: ID!, quantity: Int!): Product
       addComment(commentBody: String!): Comment
       addOrder(products: [ID]!): Order
-  }
-
-  type Auth {
-      token: ID!
-      user: User
   }
 `;
 

@@ -9,7 +9,7 @@ import Specifications from './pages/Specifications';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-import Profile from './pages/Profile';
+import Profile from './components/Profile';
 import SingleThought from './pages/Single';
 import Nav from './components/Nav';
 import Signup from './pages/Signup';
@@ -33,9 +33,11 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+
 
 function App() {
   return (
@@ -50,10 +52,9 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/profile/:username?" component={Profile} />
-            <Route exact path="/thought/:id" component={SingleThought} />
+            <Route exact path="/comment/:id" component={SingleThought} />
             <Route exact path="/purchasedHistory" component={PurchasedHistory} />
             <Route exact path="/products/:id" component={Specifications} />
-            <Route exact path="/profile/:username?" component={Profile} />
             <Route component={NoMatch} />
       </Switch>
     </StoreProvider>

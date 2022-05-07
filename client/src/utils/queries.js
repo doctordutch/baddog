@@ -4,7 +4,7 @@ export const QUERY_PRODUCTS = gql`
 {
   products {
     _id
-    productName
+    productName 
     quantity
     price
     image
@@ -31,7 +31,7 @@ export const QUERY_USER = gql`
       purchaseDate
     products {
       _id
-      productName
+     productName
       quantity
       createdAt
       image
@@ -67,7 +67,7 @@ export const QUERY_PRODUCT = gql`
 
 export const QUERY_COMMENTS = gql`
   query comments($username: String) {
-    comments(username: $ username) {
+    comments(username: $username) {
       _id
       commentBody
       createdAt
@@ -79,6 +79,18 @@ export const QUERY_COMMENTS = gql`
 
 `
 ;
+
+export const QUERY_COMMENT = gql`
+  query comment($id: ID!) {
+    comment(_id: $id) {
+      _id
+      commentBody
+      createdAt
+      username
+
+    }
+  }
+`;
 
 export const QUERY_ME = gql`
   {
@@ -93,4 +105,4 @@ export const QUERY_ME = gql`
       }
     }
   }
-`
+`;

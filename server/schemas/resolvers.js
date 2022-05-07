@@ -2,6 +2,9 @@ const { User, Comment, Product, Order } = require('../models');
 //this will notify a user of a login issue:
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+
 const resolvers = {
     Query: {
       me: async (parent, args, context) => {
@@ -48,6 +51,43 @@ const resolvers = {
         throw new AuthenticationError('You are not logged in');
   
     },
+    checkout: async (parent, args, context) => {
+      const order = new Order({products: args.products});
+
+      const line_items = [];
+      const {products} = order.populate('produts');
+
+      for (let i = 0; i < products.length; i++) {
+        const product = await stripe.products.create({
+          name: products[i].productName,
+          description: products[i].description
+        });
+
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: products[i].price * 100,
+          currency: 'usd',
+
+        });
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'https://example.com/cancel'
+
+      });
+
+      return { session: session.id};
+      
+    },
+    
       //get all users
       users: async () => {
           return User.find()
@@ -60,8 +100,7 @@ const resolvers = {
           const user = await User.findById(context.user._id).populate({
             path: 'orders.products',
             populate: 'products',
-            //select: '__v -password',
-            //populate: 'comments'
+           
 
           });
           user.orders.sort((a,b) => b.purchaseDate -a.purchaseDate);
@@ -71,8 +110,9 @@ const resolvers = {
         
       }
     },
- 
 
+  
+ 
     Mutation: {
         addUser:  async (parent, args) => {
             const user = await User.create(args);
@@ -126,9 +166,8 @@ const resolvers = {
           }
           throw new AuthenticationError('You are not logged in!')
         }
-
-       
     }
+       
   
   };
   

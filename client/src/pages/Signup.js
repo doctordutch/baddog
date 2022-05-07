@@ -8,7 +8,7 @@ import Auth from '../utils/auth';
 function Signup(props) {
   const [formState, setFormState] = useState({ username: '', email: '', password: '' });
   const [addUser] = useMutation(ADD_USER);
-  // update state based on form input changes
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -18,7 +18,6 @@ function Signup(props) {
     });
   };
 
-  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -47,7 +46,6 @@ function Signup(props) {
                 name='username'
                 type='username'
                 id='username'
-                value={formState.username}
                 onChange={handleChange}
               />
               <input
@@ -56,7 +54,6 @@ function Signup(props) {
                 name='email'
                 type='email'
                 id='email'
-                value={formState.email}
                 onChange={handleChange}
               />
               <input
@@ -65,7 +62,6 @@ function Signup(props) {
                 name='password'
                 type='password'
                 id='password'
-                value={formState.password}
                 onChange={handleChange}
               />
               <button className='btn d-block w-100' type='submit'>

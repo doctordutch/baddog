@@ -57,9 +57,8 @@ export const ADD_COMMENT = gql`
             commentBody
             createdAt
             username
-            products {
-                _id
-            }
+    
+
         }
     }
 `

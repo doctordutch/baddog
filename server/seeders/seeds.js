@@ -68,7 +68,7 @@ db.once('open', async () => {
     {
       productName: 'Residential doors',
       description: 'Standard size solid wood doors.  Custom design, species and sizes available.',
-      image: 'hickory-vanity 2.jpg',
+      image: 'hickory-door.jpg',
       price: 250.00,
       quantity: 6
     },
@@ -92,7 +92,7 @@ db.once('open', async () => {
     {
       commentBody: 'The product arrived in perfect conditions',
       username: 'maria123',
-      image: 'hickory-vanity 2.jpg'
+      image: 'hickory-door.jpg'
     },
     {
       commentBody: 'Love the product',
