@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, Product } = require('../models');
+const { User, Product, Comment} = require('../models');
 
 db.once('open', async () => {
   //await Comment.deleteMany({});
@@ -68,7 +68,7 @@ db.once('open', async () => {
     {
       productName: 'Residential doors',
       description: 'Standard size solid wood doors.  Custom design, species and sizes available.',
-      image: 'spinning-top.jpg',
+      image: 'hickory-vanity 2.jpg',
       price: 250.00,
       quantity: 6
     },
@@ -78,11 +78,36 @@ db.once('open', async () => {
         'Vanity for residential bath in custom side and species.',
       image: 'hickory-vanity.jpg',
       price: 1200.00,
-      quantity: 2
+      quantity: 2,
+      commentBody: 'The product arrived in perfect conditions',
+      username: 'maria123',
     },
     ]);
 
   console.log('products seeded');
+
+  await Comment.deleteMany();
+
+  const comments = await Comment.insertMany([
+    {
+      commentBody: 'The product arrived in perfect conditions',
+      username: 'maria123',
+      image: 'hickory-vanity 2.jpg'
+    },
+    {
+      commentBody: 'Love the product',
+      username: 'ruby78',
+      image: 'dining-table.jpg'
+    }, 
+    {
+      commentBody: 'Looks exactly how I ordered it.',
+      username: 'lucyh',
+      image: 'design-vanity.jpg',
+    },
+  ]);
+  
+  console.log('comments seeded')
+
 
   await User.deleteMany();
   

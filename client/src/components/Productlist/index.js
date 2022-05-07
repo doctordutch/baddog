@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-
+import CommentList from '../CommentList';
 import SingleProduct from '../SingleProduct';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
@@ -59,7 +59,9 @@ function ProductList() {
                     quantity={product.quantity}
                     description={product.description}
                     createdAt={product.createdAt}
+
                     />
+                    
             ))}
         </div>
     ) : (

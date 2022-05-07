@@ -49,3 +49,17 @@ export const ADD_ORDER = gql`
         }
     }
     `;
+
+export const ADD_COMMENT = gql`
+    mutation addComment($commentBody: String!) {
+        addComment(commentBody: $commentBody) {
+            _id
+            commentBody
+            createdAt
+            username
+            products {
+                _id
+            }
+        }
+    }
+`

@@ -43,7 +43,7 @@ const typeDefs = gql`
     user(username: String!): User
     products(product: ID, productName: String): [Product]
     product(_id: ID!): Product
-    comments: [Comment]
+    comments(username: String): [Comment]
     comment(_id: ID!): Comment
     order(_id: ID!): Order
 
@@ -54,7 +54,7 @@ const typeDefs = gql`
       addUser(username: String!, email: String!, password: String!): Auth
       updateUser(username: String, email: String, password: String): User
       updateProduct(_id: ID!, quantity: Int!): Product
-      addComment(commentId: ID!): Comment
+      addComment(commentBody: String!): Comment
       addOrder(products: [ID]!): Order
   }
 

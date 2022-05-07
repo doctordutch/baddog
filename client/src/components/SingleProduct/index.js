@@ -5,6 +5,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY} from '../../utils/actions'
 import { idbPromise } from '../../utils/helpers';
 
+
 function SingleProduct(item) {
     const [state, dispatch] = useStoreContext();
     const {
@@ -49,6 +50,7 @@ function SingleProduct(item) {
                     src={`/images/${image}`}
                     />
                     <p>{productName}</p>
+                
             </Link>
         <div>
             <div>{quantity} {('item', quantity)} in Stock</div>
@@ -56,9 +58,11 @@ function SingleProduct(item) {
             <p>{description} {createdAt}</p>
         </div>
         <button onClick={addedProduct}>Add to cart</button>
+          
+
         </div>
-    );
-}
+      
+    )}
 
 export default SingleProduct;
 

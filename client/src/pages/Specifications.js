@@ -1,10 +1,13 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { QUERY_PRODUCTS } from '../utils/queries';
+import { QUERY_PRODUCTS, QUERY_COMMENTS } from '../utils/queries';
 import { useStoreContext } from '../utils/GlobalState';
 import { Link, useParams } from 'react-router-dom';
 import { idbPromise } from '../utils/helpers';
 import Cart from '../components/Cart';
+import CommentBox from '../components/CommentBox';
+import CommentList from '../components/CommentList';
+
 import {
     REMOVE_FROM_CART,
     UPDATE_CART_QUANTITY,
@@ -14,12 +17,14 @@ import {
 
 
 function Specifications() {
+    const { loading, data} = useQuery(QUERY_COMMENTS, QUERY_PRODUCTS);
+    const comments = data?.comments || [];
+    console.log(comments);
     const [state, dispatch] = useStoreContext();
     const { id } = useParams();
 
     const [currentProduct, setCurrentProduct] = useState({});
 
-    const { loading, data } = useQuery(QUERY_PRODUCTS);
     const { products, cart } = state;
 
     useEffect(() => {
@@ -101,6 +106,9 @@ function Specifications() {
                         src={`/images/${currentProduct.image}`}
                         alt={currentProduct.productName}
                     />
+                    <CommentBox />
+                    <CommentList comments={comments} title="Reviews..." />
+
                 </div>
                 ) : null}
             <Cart />
