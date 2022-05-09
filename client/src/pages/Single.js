@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCT } from '../utils/queries';
 import CommentList from '../components/CommentList';
+import Comment from '../components/Comment.js';
 
 const SingleProduct = props => {
   const { id: productId } = useParams();
@@ -25,9 +26,11 @@ const SingleProduct = props => {
         </p>
         <div className="card-body">
           <p>{product.description}</p>
+          {product.commentBody}
         </div>
       </div>
       {product.commentCount > 0 && <CommentList comments={product.comments}/>}
+      <Comment />
     </div>
   );
 };

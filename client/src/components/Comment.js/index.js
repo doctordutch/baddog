@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import CommentList from '../CommentList';
 
-import Auth from '../../utils/auth';
 import { useQuery } from '@apollo/client';
 import { QUERY_COMMENT } from '../../utils/queries';
 

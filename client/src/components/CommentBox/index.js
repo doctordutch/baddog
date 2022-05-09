@@ -4,8 +4,8 @@ import { useMutation } from '@apollo/client';
 import { ADD_COMMENT} from '../../utils/mutations';
 import { useQuery } from '@apollo/client';
 
+import Auth from '../../utils/auth';
 const CommentBox = () => {
-    const {  comments } = useQuery(QUERY_COMMENTS);
 
     const [commentBody, setText ] = useState('');
     const [ wordCount, setwordCount ] = useState(0);
@@ -77,6 +77,7 @@ const CommentBox = () => {
                 Submit
             </button>
             </form>
+        
         </div>
     )
 };

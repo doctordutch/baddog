@@ -4,7 +4,6 @@ const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
-
 const resolvers = {
     Query: {
       me: async (parent, args, context) => {
@@ -53,13 +52,13 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const order = new Order({products: args.products});
-
       const line_items = [];
+      
       const {products} = order.populate('produts');
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
-          name: products[i].productName,
+          name: products[i].name,
           description: products[i].description
         });
 
@@ -76,6 +75,7 @@ const resolvers = {
       }
 
       const session = await stripe.checkout.sessions.create({
+        name: 'productName',
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
@@ -98,8 +98,9 @@ const resolvers = {
       user: async (parent, args, context) => {
         if (context.user) {
           const user = await User.findById(context.user._id).populate({
-            path: 'orders.products',
-            populate: 'products',
+          path: 'comments.commentBody',
+          path: 'orders.products',
+          populate: 'products',
            
 
           });

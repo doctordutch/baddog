@@ -7,7 +7,6 @@ import { idbPromise } from '../utils/helpers';
 import Cart from '../components/Cart';
 import CommentBox from '../components/CommentBox';
 import CommentList from '../components/CommentList';
-import { QUERY_COMMENT } from '../utils/queries';
 import Auth from '../utils/auth';
 import Comment from '../components/Comment.js';
 
@@ -114,17 +113,20 @@ function Specifications(props) {
                         alt={currentProduct.productName}
                     />
                     {loggedIn && (
-                    <CommentBox />
+                        <>
+                            <CommentBox />
+                           <div>{!useParams && <CommentBox />}</div>
+            
+
+                    </>
     )}
                     <CommentList comments={comments}
                     title="Reviews..."                   
 
                     />                   
-                     <Comment />
+                    <Comment />
 
-                    {currentProduct.commentBody}
-                    <div>{!useParams && <CommentBox />}</div>
-                    
+    
 
                 </div>
                 ) : null}
