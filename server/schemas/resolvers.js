@@ -24,12 +24,15 @@ const resolvers = {
       },
       products: async (parent, { productName }) => {
         const params = {}; 
-        if (productName) {
-          params.productName = {
-            $regex: productName
-          }; 
-        }
-        return await Product.find(params).populate('productName');
+        if (product) {
+          params.product = product
+          }
+          if (productName) {
+            params.productName = {
+              $regex: productName
+            };
+          }
+        return await Product.find(params).populate('product');
       },
       product: async (parent, { _id }) => {
         return await Product.findById(_id).populate('productName');
