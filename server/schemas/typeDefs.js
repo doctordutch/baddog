@@ -15,6 +15,17 @@ const typeDefs = gql`
     comments: [Comment]
   }
 
+  type Products {
+    _id: ID
+    productName: String
+    createdAt: String
+    description: String
+    price: Float
+    image: String
+    quantity: Int
+    comments: [Comment]
+  }
+
   type Comment {
     _id: ID
     commentBody: String
@@ -33,9 +44,9 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    products: [Product]
+    products(product: ID, productName: String): [Product]
     product(_id: ID!): Product
-    comments: [Comment]
+    comments(username: String): [Comment]
     comment(_id: ID!): Comment
   }
 

@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+//import Productlist from './components/Productlist';
 //this will bring in Apollo
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-import SingleThought from './pages/SingleProduct';
+import SingleProduct from './pages/SingleProduct';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Quote from './pages/Quote'
@@ -35,7 +36,7 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/quote" component={Quote} />
             <Route exact path="/profile/:username?" component={Profile} />
-            <Route exact path="/thought/:id" component={SingleThought} />
+            <Route exact path="/product/:id" component={SingleProduct} />
             <Route component={NoMatch} />
             
             </Switch>
