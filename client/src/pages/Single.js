@@ -26,11 +26,11 @@ const SingleProduct = props => {
         </p>
         <div className="card-body">
           <p>{product.description}</p>
-          {product.commentBody}
         </div>
       </div>
+
       {product.commentCount > 0 && <CommentList comments={product.comments}/>}
-      <Comment />
+
     </div>
   );
 };

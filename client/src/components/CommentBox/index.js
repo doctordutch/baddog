@@ -2,34 +2,30 @@ import React, { useState } from 'react';
 import { QUERY_COMMENTS, QUERY_ME } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT} from '../../utils/mutations';
-import { useQuery } from '@apollo/client';
 
-import Auth from '../../utils/auth';
 const CommentBox = () => {
-
     const [commentBody, setText ] = useState('');
     const [ wordCount, setwordCount ] = useState(0);
 
     const [addComment, {error}] = useMutation(ADD_COMMENT, {
-        update(cache, {data: { addComment } }) {
+        update(cache, {data: {addComment} }) {
             try{
-                const { me } = cache.readQuery({ query: QUERY_ME });
-                cache.writeQuery({
-                    query: QUERY_ME,
-                    data: { me: { ...me, comments: [...me.comments, addComment ] }},
-                });
-            } catch (e) {
-                console.warn("First review by user")
-            }
                 const { comments } = cache.readQuery({ query: QUERY_COMMENTS});
                 cache.writeQuery({
                     query: QUERY_COMMENTS,
-                    data: { comments: [addComment, comments]},
-                 
+                    data: { comments: [addComment, ...comments]},
                 });
-        }
-    });
-
+            } catch (e) {
+                console.error(e);
+            }
+        const { me } = cache.readQuery({ query: QUERY_ME });
+            cache.writeQuery({
+                query: QUERY_ME,
+                data: { me: { ...me, comments: [ addComment, ...me.comments ]}},
+        
+        });
+    },
+});
     const handleChange = (event) => {
         if(event.target.value.length <=500) {
             setText(event.target.value);
@@ -42,7 +38,7 @@ const CommentBox = () => {
 
         try {
             await addComment({
-                variables:  { commentBody },
+                variables:  {commentBody},
             });
 
             setText('');
@@ -77,7 +73,6 @@ const CommentBox = () => {
                 Submit
             </button>
             </form>
-        
         </div>
     )
 };

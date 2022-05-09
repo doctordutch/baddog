@@ -108,7 +108,6 @@ db.once('open', async () => {
   
   console.log('comments seeded')
 
-
   await User.deleteMany();
   
     await User.create({

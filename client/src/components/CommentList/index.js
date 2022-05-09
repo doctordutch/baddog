@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CommentList = ({ comments, title }) => {
     if (!comments.length) {
-        return <h3>No Reviews Yet</h3>
+        return <h3>No Comments Yet</h3>
     }
   return (
       <div>
@@ -13,16 +13,18 @@ const CommentList = ({ comments, title }) => {
                 <div key={comment._id}>
                 <p className='card-header'>
                 
-                <Link to={`/comment/${comment.username}`} 
+                <Link to={`/profile/${comment.username}`} 
                     style={{ fontWeight: 700 }}
                     >               
-                {comment.username}
+              
                 </Link>{' '}
-                review on {comment.createdAt}
                 </p>
                 <div>
                 <Link to={`/comment/${comments._id}`}>
                     <p>{comment.commentBody}</p>
+                    {comment.createdAt}
+                {comment.username}
+                 {comment.createdAt}
               </Link>
             </div>
             </div>

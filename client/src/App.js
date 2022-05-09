@@ -10,9 +10,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
 import Profile from './components/Profile';
-import SingleThought from './pages/Single';
 import Nav from './components/Nav';
 import Signup from './pages/Signup';
+import Single from './pages/Single';
+
 
 import { StoreProvider  } from './utils/GlobalState';
 import PurchasedHistory from './pages/PurchasedHistory';
@@ -52,9 +53,13 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/profile/:username?" component={Profile} />
-            <Route exact path="/comment/:id" component={SingleThought} />
+            <Route exact path="/comment/:id" component={Specifications} />
             <Route exact path="/purchasedHistory" component={PurchasedHistory} />
             <Route exact path="/products/:id" component={Specifications} />
+            <Route exact path="/profile/:username?" component={Profile} />
+            <Route exact path="/comment/:id" component={Single} />
+
+
             <Route component={NoMatch} />
       </Switch>
     </StoreProvider>

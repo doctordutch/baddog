@@ -26,6 +26,7 @@ const Comment = (props) => {
                 </p>{' '}
              { comment.createdAt} {comment.commentBody}
             </div>
+            
         </div>
     );
 };

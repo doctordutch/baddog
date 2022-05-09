@@ -1,15 +1,12 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { QUERY_PRODUCTS, QUERY_COMMENTS} from '../utils/queries';
+import { QUERY_PRODUCTS, QUERY_COMMENTS } from '../utils/queries';
 import { useStoreContext } from '../utils/GlobalState';
 import { Link, useParams } from 'react-router-dom';
 import { idbPromise } from '../utils/helpers';
 import Cart from '../components/Cart';
 import CommentBox from '../components/CommentBox';
 import CommentList from '../components/CommentList';
-import Auth from '../utils/auth';
-import Comment from '../components/Comment.js';
-
 
 import {
     REMOVE_FROM_CART,
@@ -19,10 +16,11 @@ import {
 } from '../utils/actions';
 
 
-function Specifications(props) {
-    const { loading, data} = useQuery(QUERY_PRODUCTS, QUERY_COMMENTS);
-
-    const [state, dispatch] = useStoreContext({});
+function Specifications() {
+    const { loading, data} = useQuery(QUERY_COMMENTS, QUERY_PRODUCTS);
+    const comments = data?.comments || [];
+    console.log(comments);
+    const [state, dispatch] = useStoreContext();
     const { id } = useParams();
 
     const [currentProduct, setCurrentProduct] = useState({});
@@ -52,7 +50,6 @@ function Specifications(props) {
             });
         }
     }, [products, data, loading, dispatch, id]);
-
 
     const addedProduct = () => {
         const itemAdded = cart.find((cartItem) => cartItem._id === id);
@@ -87,9 +84,6 @@ function Specifications(props) {
         idbPromise('cart', 'delete', {...currentProduct});
 };
 
-    const comments = data?.comments || [];
-    const loggedIn = Auth.loggedIn();
-
     return (
         <>
             {currentProduct  && cart ?  (
@@ -112,21 +106,8 @@ function Specifications(props) {
                         src={`/images/${currentProduct.image}`}
                         alt={currentProduct.productName}
                     />
-                    {loggedIn && (
-                        <>
-                            <CommentBox />
-                           <div>{!useParams && <CommentBox />}</div>
-            
-
-                    </>
-    )}
-                    <CommentList comments={comments}
-                    title="Reviews..."                   
-
-                    />                   
-                    <Comment />
-
-    
+                    <CommentBox />
+                    <CommentList comments={comments} title="Reviews..." />
 
                 </div>
                 ) : null}
