@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SingleProduct from '../../pages/SingleProduct';
+import productImages from '../../images/cherrywood vanity.jpg';
 
 const Productlist = ({ products, title }) => {
 
@@ -13,7 +14,7 @@ const Productlist = ({ products, title }) => {
           <div key={product._id} className="card mb-3">
             <p className="card-header">
               
-              <img src='../../images/${product.image}'/>
+              <img src={productImages} alt="Bad Dog products"/>
             
                </p>
             
