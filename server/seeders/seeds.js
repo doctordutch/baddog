@@ -1,34 +1,19 @@
-const faker = require('faker');
-
 const db = require('../config/connection');
-const { User, Product } = require('../models');
+const { User, Product, Comment} = require('../models');
 
 db.once('open', async () => {
   //await Comment.deleteMany({});
-  await User.deleteMany({});
   await Product.deleteMany();
-
-  // create user data
-  const userData = [];
-
-  for (let i = 0; i < 50; i += 1) {
-    const username = faker.internet.userName();
-    const email = faker.internet.email(username);
-    const password = faker.internet.password();
-
-    userData.push({ username, email, password });
-  }
-
-  const createdUsers = await User.collection.insertMany(userData);
 
 
   // create products
   const products = await Product.insertMany([
     {
+      
       productName: 'Charcuterie Board',
       description:
         'Beautiful chartuterie board in hickory wood with horseshoe inlay.  Custom wood species and inlay items available!',
-      image: 'char board horseshow.jpg',
+      image: 'char-board-horseshoe.jpg',
       price: 75.00,
       quantity: 5
     },
@@ -36,7 +21,7 @@ db.once('open', async () => {
       productName: 'Bath vanity in cherrywood',
       description:
         'Custom fit to specifications, vanity with drawers, mirrors.',
-      image: 'cherrywood vanity.jpg',
+      image: 'cherrywood-vanity.jpg',
       price: 1500.00,
       quantity: 2
     },
@@ -44,7 +29,7 @@ db.once('open', async () => {
       productName: 'Coffee table',
       description:
         'Live edge table from maple, "Honolulu blue" epoxy fill, variation and customization upon request.',
-      image: 'coffee table in blue.jpg',
+      image: 'coffee-table-in-blue.jpg',
       price: 450.00,
       quantity: 1
     },
@@ -52,7 +37,7 @@ db.once('open', async () => {
       productName: 'Home office design per hour',
       description:
         'Full home office layout includes custom design printed with onsite measurement.',
-      image: 'design-home office.jpg',
+      image: 'design-home-office.jpg',
       price: 40.00,
       quantity: 1
     },
@@ -60,7 +45,7 @@ db.once('open', async () => {
       productName: 'Kitchen table design per hour',
       description:
         'Kitchen table design layout includes custom design printed with onsite measurement.',
-      image: 'design-kitchen table.jpg',
+      image: 'design-kitchen-table.jpg',
       price: 40.00,
       quantity: 1
     },
@@ -76,14 +61,14 @@ db.once('open', async () => {
       productName: 'Dining table',
       description:
         'Dining table, 8 feet in length with custom design and welded steel base.  Custom species, length and width available.',
-      image: 'dining table.jpg',
+      image: 'dining-table.jpg',
       price: 12000.00,
       quantity: 1
     },
     {
       productName: 'Residential doors',
       description: 'Standard size solid wood doors.  Custom design, species and sizes available.',
-      image: 'spinning-top.jpg',
+      image: 'hickory-door.jpg',
       price: 250.00,
       quantity: 6
     },
@@ -91,13 +76,61 @@ db.once('open', async () => {
       productName: 'Bath vanity in hickory',
       description:
         'Vanity for residential bath in custom side and species.',
-      image: 'hickory vanity.jpg',
+      image: 'hickory-vanity.jpg',
       price: 1200.00,
-      quantity: 2
+      quantity: 2,
+      commentBody: 'The product arrived in perfect conditions',
+      username: 'maria123',
     },
     ]);
 
   console.log('products seeded');
+
+  await Comment.deleteMany();
+
+  const comments = await Comment.insertMany([
+    {
+      commentBody: 'The product arrived in perfect conditions',
+      username: 'maria123',
+      image: 'hickory-door.jpg'
+    },
+    {
+      commentBody: 'Love the product',
+      username: 'ruby78',
+      image: 'dining-table.jpg'
+    }, 
+    {
+      commentBody: 'Looks exactly how I ordered it.',
+      username: 'lucyh',
+      image: 'design-vanity.jpg',
+    },
+  ]);
+  
+  console.log('comments seeded')
+
+  await User.deleteMany();
+  
+    await User.create({
+        username: 'kat',
+        email: 'kat@test.com',
+        password: '123456',
+        orders: [
+            {
+                products: [products[0]._id, products[1]]
+            }
+        ]
+    });
+
+    await User.create({
+        username: 'lala',
+        email: 'lala@test.com',
+        password: '123456'
+    });
+
+    console.log('users seeded');
+
+    process.exit();
+});
 
   
 
@@ -118,6 +151,3 @@ db.once('open', async () => {
   //   );
   // }
 
-  console.log('all done!');
-  process.exit(0);
-});

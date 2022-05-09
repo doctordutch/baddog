@@ -31,7 +31,7 @@ const productSchema = new Schema(
       min: 0.99,
     },
     comments: [
-      { 
+      {
         type: Schema.Types.ObjectId,
         ref: 'Comment'
       }

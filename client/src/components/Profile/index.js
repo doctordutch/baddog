@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ProductList from '../components/ProductList';
+import CommentList from '../CommentList';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_USER } from '../../utils/queries';
+
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
@@ -26,7 +27,7 @@ const Profile = (props) => {
 
       <div className="flex-row justify-space-between mb-3">
         <div className="col-12 mb-3 col-lg-8">
-          <ProductList comments={user.commentBody} title={`${user.username}'s reviews...`} />
+          <CommentList comments={user.commentBody} title={`${user.username}'s reviews...`} />
           </div>
         <div className="col-12 col-lg-3 mb-3">
     
