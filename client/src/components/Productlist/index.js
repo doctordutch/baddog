@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SingleProduct from '../../pages/SingleProduct';
-import productImages from '../../images/cherrywood vanity.jpg';
+//import SingleProduct from '../../pages/SingleProduct';
+
 
 const Productlist = ({ products, title }) => {
 
@@ -13,12 +13,23 @@ const Productlist = ({ products, title }) => {
         products.map(product => (
           <div key={product._id} className="card mb-3">
             <p className="card-header">
-              
-              <img src={productImages} alt="Bad Dog products"/>
-            
-               </p>
-            
-          </div>
+              <Link to={`/product/${product.productName}`}
+                style={{ fontWeight: 700 }}
+                className="text-light">
+                  {product.productName}
+                  </Link>{''}
+    
+            </p>
+            <div className="card-body">
+              <Link to={`/product/$product._id}`}>
+               <p>Price: {product.price}</p>
+               <p># available: {product.quantity}</p>
+               <p>{product.description}</p>
+               <p>{product.image}</p>
+              </Link>                   
+               
+            </div>
+            </div>
         ))}
     </div>
     );
