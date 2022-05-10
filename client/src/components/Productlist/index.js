@@ -52,12 +52,13 @@ function ProductList() {
         <div>
             <h2> Products:</h2>
             {state.products.length ? (
-                <div>
+                <div className='row'>
+                    <div className='column'>
                     {Products().map((product) => (
                     <SingleProduct
                     key={product._id}
                     _id={product._id}
-                    image={product.image}
+                    image={product.image} className ='photo'
                     productName={product.productName}
                     price={product.price}
                     quantity={product.quantity}
@@ -67,6 +68,7 @@ function ProductList() {
                     />
               
             ))}
+            </div>
         </div>
     ) : (
         <h3> No products have been added!</h3>

@@ -15,7 +15,7 @@ import Profile from './components/Profile';
 import Nav from './components/Nav';
 import Signup from './pages/Signup';
 import Single from './pages/Single';
-
+import Quote from './pages/Quote';
 
 import { StoreProvider  } from './utils/GlobalState';
 import PurchasedHistory from './pages/PurchasedHistory';

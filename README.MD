@@ -9,4 +9,6 @@ Credit: Deep Thoughts async was our foundational code to determine navigation, s
 
 
 
-  <Productlist products={products} title="Beautiful woodcrafts for your home." />
+  className="bg-secondary mb-4 py-2 flex-row align-center"
+
+  className="container flex-row justify-space-between-lg justify-center align-center"

@@ -26,7 +26,7 @@ function Quote() {
               }
             } else {
                   if (!e.target.value.length) {
-                      setErrorMessage(`{$e.target.name} is required.`);
+                      setErrorMessage(`Name is required.`);
                   } else {
                       setErrorMessage('');
                   }

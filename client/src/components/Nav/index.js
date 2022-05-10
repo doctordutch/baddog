@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../../utils/auth';
 import { Link } from 'react-router-dom';
+import BadDog from '../../images/Bad Dog logo.jpg';
 
 function Nav() {
 
@@ -33,6 +34,11 @@ function Nav() {
                         Login
                     </Link>
                 </li>
+                <li>
+                    <Link to='/quote' >
+                        Get a quote!
+                    </Link>
+                </li>
 
             </ul>
 
@@ -47,7 +53,7 @@ return (
             Bad Dog Woodshop
             </Link>
         </h1>
-
+        <img src={BadDog} alt="Bad Dog logo" className='photo' />
         <nav>
             {showNavigation()}
         </nav>

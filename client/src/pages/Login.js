@@ -56,7 +56,7 @@ const Login = (props) => {
                 onChange={handleChange}
               />
                    {error ? (
-              <p className="error-text">Credentials dont match</p>
+              <p className="error-text">Credentials don't match</p>
   ) : null}
               <button className='btn d-block w-100' type='submit'>
                 Submit

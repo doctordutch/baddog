@@ -30,7 +30,7 @@ const Cart = () => {
             <div className="closed" onClick={toggleCart}>
                 <span
                     role="img"
-                    aria-label="trash">🛒</span>
+                    aria-label="trash">🛒 Go to my cart!</span>
             </div>
         );
     }
