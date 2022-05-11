@@ -22,9 +22,7 @@ const CommentList = ({ comments, title }) => {
                 <div>
                 <Link to={`/comment/${comments._id}`}>
                     <p>{comment.commentBody}</p>
-                    {comment.createdAt}
-                {comment.username}
-                 {comment.createdAt}
+                    {comment.username} on    {comment.createdAt}
               </Link>
             </div>
             </div>

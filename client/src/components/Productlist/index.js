@@ -12,7 +12,7 @@ import { QUERY_PRODUCTS } from '../../utils/queries';
 
 import {idbPromise} from '../../utils/helpers';
 
-function ProductList() {
+function Productlist() {
     const [state, dispatch] = useStoreContext();
 
     const {currentProducts} = state;
@@ -77,4 +77,4 @@ function ProductList() {
     );
 }
 
-export default ProductList;
+export default Productlist;

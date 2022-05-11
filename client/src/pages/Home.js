@@ -1,12 +1,12 @@
 import React from 'react';
 import Cart from '../components/Cart';
-import ProductList from '../components/ProductList';
+import Productlist from '../components/Productlist';
 
 const Home = () => {
   return (
     <main>
       <div className='row'>
-        <ProductList />
+        <Productlist />
         <Cart />
       </div>
     </main>
