@@ -44,7 +44,6 @@ const productSchema = new Schema(
   }
 );
 
-productSchema.virtual('commentCount').get(function() {  return this.comments.length;});
 
 const Product = model('Product', productSchema);
 

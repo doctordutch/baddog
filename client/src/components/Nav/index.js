@@ -30,7 +30,7 @@ function Nav() {
                     </Link>
                 </li>
                 <li>
-                    <Link to='login'>
+                    <Link to='/login'>
                         Login
                     </Link>
                 </li>

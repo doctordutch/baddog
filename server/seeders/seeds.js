@@ -135,20 +135,5 @@ db.once('open', async () => {
 
   
 
-  // create comments
-  // for (let i = 0; i < 100; i += 1) {
-  //   const commentBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
-  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-  //   const { username } = createdUsers.ops[randomUserIndex];
-
-  //   // const randomProductIndex = Math.floor(Math.random() * createdProducts.length);
-  //   // const { _id: CommentId } = createdComments[randomCommentIndex];
-
-  //   await Product.updateOne(
-  //     { _id: productId },
-  //     { $push: { comments: { commentBody, username } } },
-  //     { runValidators: true }
-  //   );
-  // }
 
