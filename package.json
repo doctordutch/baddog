@@ -1,5 +1,5 @@
 {
-  "name": "deep-thoughts",
+  "name": "baddogwoodshop",
   "version": "1.0.0",
   "description": "Your project should fulfill the following requirements:",
   "main": "server/server.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cjsmith011/deep-thoughts.git"
+    "url": "git+https://github.com/doctordutch/project3.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cjsmith011/deep-thoughts/issues"
+    "url": "https://github.com/doctordutch/project3/issues"
   },
-  "homepage": "https://github.com/cjsmith011/deep-thoughts#readme",
+  "homepage": "https://github.com/doctordutch/project3/#readme",
   "devDependencies": {
     "concurrently": "^7.1.0"
   },
