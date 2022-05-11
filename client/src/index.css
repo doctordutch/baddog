@@ -37,6 +37,7 @@ body {
   background-color: #e2ecb1e1;
 }
 image {
+  margin: 2;
   width: 50;
   height: 50;
 }
@@ -44,11 +45,12 @@ image {
 
 
 button {
-  background-color: #e7e7e7; 
+  background-color: #daaf95; 
   color: black;
   font-size: 20px;
-  border-radius: 12px;
+  border-radius: 13px;
   width: 250px;
+  margin-bottom: 1rem;
   }
 
   .button:hover {background-color: #3e8e41}
@@ -67,7 +69,7 @@ button {
 img {
   width: 20rem;
   height: 20rem;
-  border-radius: 20%;
+  border-radius: 10%;
 }
 h1,
 h2,
