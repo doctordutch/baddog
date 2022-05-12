@@ -65,6 +65,8 @@ a design consultation.
 
 ## Deployed Application: 
 
+[Heroku](https://baddogshop.herokuapp.com/)
+
 
 ## Credit: 
 Deep Thoughts async was our foundational code to determine navigation, seeds and folder structure. 
