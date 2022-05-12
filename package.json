@@ -1,7 +1,7 @@
 {
   "name": "baddogwoodshop",
   "version": "1.0.0",
-  "description": "Bad Dog Custom Wood Shop:",
+  "description": "Bad Dog Custom Wood Shop",
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
