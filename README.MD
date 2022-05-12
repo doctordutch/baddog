@@ -42,6 +42,10 @@ a design consultation.
 * Stripe wasn't fully integrated but hopefully in the future it could be added to the website.
 
 ## Screenshot: 
+* In case the products dont load and it looks like the picture below, click the Bad Dog Woodshop name.
+<img width="604" alt="image" src="https://user-images.githubusercontent.com/94399039/167985888-c571b2e2-09f2-45e0-89b0-d6aa9670ca37.png">
+
+
 * Picture below shows the website on as soon it's launched.
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/94399039/167730724-56ca52f5-3505-44d7-bd0b-23ad6b51abfa.png">
 
